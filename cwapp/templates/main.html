@@ -1,0 +1,29 @@
+{%extends 'base.html'%}
+{%block title%}Continuing Writing{%endblock%}
+{%block content%}
+    <main>
+        <h1>Лучшие</h1>
+        <section class="posts">
+            {%for post in posts_best%}
+            <a href="{%url 'post' post.id%}">
+                <div class="post">
+                    <img src="{{post.image.url}}" alt="" class="post_img">
+                    <h2 class="">{{post.title}}</h2>
+                    <h2>{{post.likes.count}}</h2>
+                </div>
+            </a>
+            {%endfor%}
+        </section>
+        <h2>Последние Работы и Обновления</h2>
+        <section class="posts">
+            {%for post in posts%}
+            <a href="{url 'post' post.id}">
+                <div class="post">
+                    <img src="{{post.image.url}}" alt="" class="post_img">
+                    <h2 class="">{{post.title}}</h2>
+                </div>
+            </a>
+            {%endfor%}
+        </section>
+    </main>
+{%endblock%}

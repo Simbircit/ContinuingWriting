@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ContinuingWriting</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="" class="logo">
+                ContinuingWriting
+                <img src="" alt="">
+            </a>
+            <a href="">registration</a>
+            <a href="">login</a>
+            <a href="">Write</a>
+        </nav>
+        <a href="" class="profile_box">
+            <h2 class="username">{{user.username}}</h2>
+            <img src="" alt="" class="avatar">
+        </a>
+        <a href="">logout</a>
+    </header>
+    <main>
+        <div class="">
+            <img src="{{post.image.url}}" alt="">
+            <h2>{{post.title}}</h2>
+        </div>
+        <form method="post">
+            {%csrf_token%}
+            {{form}}
+            <button>написать</button>
+        </form>
+        <section class="posts">
+            {%for comment in comments%}
+            <a href="">
+                <div class="post">
+                    <img src="" alt="" class="">
+                    <h2 class=""></h2>
+                </div>
+            </a>
+            {%endfor%}
+        </section>
+    </main>
+</body>
+</html>

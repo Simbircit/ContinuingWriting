@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{%block title%}{%endblock%}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style.css'%}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/" class="logo">
+                ContinuingWriting
+                <img src="" alt="" class="logo_img">
+            </a>
+            <a href="{%url 'register'%}">registration</a>
+            <a href="{%url 'login'%}">login</a>
+            <a href="{%url 'create_post'%}">Write</a>
+        </nav>
+        <a href="{%url 'profile'%}" class="profile_box">
+            <h2 class="username">{{user.username}}</h2>
+            <img src="" alt="" class="avatar">
+        </a>
+        <a href="{%url 'logout_url'%}">logout</a>
+    </header>
+    {%block content%}
+    {%endblock%}
+</body>
+</html>
