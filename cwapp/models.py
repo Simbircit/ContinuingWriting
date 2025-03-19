@@ -17,7 +17,7 @@ class Post(models.Model):
     end_title = models.CharField(max_length=300, null=True, blank=True)
     post_start = models.TextField(max_length=3000)
     post_end = models.TextField(max_length=3000, null=True, blank=True)
-    image = models.ImageField()
+    image = models.ImageField(upload_to='images')
 
     continues_max = models.PositiveIntegerField(default=0)
     published = models.DateTimeField(auto_now=True)

@@ -2,10 +2,16 @@
 {%block title%}{{post.title}}{%endblock%}
 {%block content%}
     <main>
-        <div class="">
-            <img src="{{post.image.url}}" alt="">
-            <h2>{{post.title}}</h2>
-        </div>
+        <a href="{%url 'post' post.id%}">
+            <div class="post">
+                <img src="{{post.image.url}}" alt="" class="post_img">
+                <h2 class="">{{post.title}}</h2>
+                <h2>{{post.likes.count}}</h2>
+            </div>
+        </a>
+        {%for continue in continues%}
+        <a href="" class="">{{continue.title}}</a>
+        {%endfor%}
         <form method="post">
             {%csrf_token%}
             {{form}}

@@ -18,7 +18,8 @@ class LoginUser(AuthenticationForm):
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = []
+        fields = ['author', 'title', 'description', 'start_title', 'post_start', 'end_title', 'post_end', 'status',
+                  'image', 'continues_max']
 
 
 class ContinueCreationForm(forms.ModelForm):
@@ -31,3 +32,19 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ['text']
+
+
+class ProfileAvatarUpdate(forms.ModelForm):
+
+    class Meta:
+
+        model = Profile
+        fields = ['avatar']
+
+
+class ProfileEdit(forms.ModelForm):
+
+    class Meta:
+
+        model = User
+        fields = ['username', 'first_name', 'email']

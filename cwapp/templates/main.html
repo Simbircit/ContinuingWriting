@@ -19,7 +19,9 @@
             {%for post in posts%}
             <a href="{url 'post' post.id}">
                 <div class="post">
+                    {%if post.image%}
                     <img src="{{post.image.url}}" alt="" class="post_img">
+                    {%endif%}
                     <h2 class="">{{post.title}}</h2>
                 </div>
             </a>
