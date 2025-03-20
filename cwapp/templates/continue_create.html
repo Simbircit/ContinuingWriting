@@ -1,4 +1,11 @@
 {%extends 'base.html'%}
 {%block title%}Continuing Writing{%endblock%}
 {%block content%}
+<main>
+    <form method="post">
+        {%csrf_token%}
+        {{form}}
+        <button>Create Continue</button>
+    </form>
+</main>
 {%endblock%}

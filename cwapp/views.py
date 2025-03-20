@@ -96,20 +96,20 @@ def post_page(request, post_id):
 
 def post_continue(request, continue_id):
 
-    post = get_object_or_404(PostContinue, id=continue_id)
-    comments = Comment.objects.filter(postcontiue__id=continue_id)
+    post_continue = get_object_or_404(PostContinue, id=continue_id)
+    comments = Comment.objects.filter(post_continue_id=continue_id)
 
     if request.method == 'POST':
         form = CommentForm(request.POST)
         comment = Comment()
         comment.author = User.objects.get(username=request.user.username)
-        comment.post = Post.objects.get(id=continue_id)
+        comment.post_continue = PostContinue.objects.get(id=continue_id)
         comment.text = request.POST.get('text')
         comment.save()
     else:
         form = CommentForm()
 
-    context = {'post': post, 'comments': comments, 'form': form}
+    context = {'post_continue': post_continue, 'comments': comments, 'form': form}
     return render(request, 'post_continue.html', context)
 
 
@@ -128,7 +128,7 @@ def post_info(request, post_id):
         comment.save()
     else:
         form = CommentForm()
-    context = {'post': post, 'continues': continues, 'comments': comments}
+    context = {'post': post, 'continues': continues, 'comments': comments, 'form': form}
 
     return render(request, 'post_info.html', context)
 
@@ -156,14 +156,28 @@ def post_create(request):
     return render(request, 'post_create.html', {'form': form})
 
 
-def continue_create(request):
+def continue_create(request, post_id):
+
+    post = get_object_or_404(Post, id=post_id)
+    post_chapter = post.continues_count + 1
+
     if request.method == 'POST':
         form = ContinueCreationForm(request.POST, request.FILES)
-        post = PostContinue()
+        post_continue = PostContinue()
+        post_continue.post = get_object_or_404(Post, id=post_id)
+        post_continue.chapter = post_chapter
+        post_continue.author = User.objects.get(username=request.user.username)
+        post_continue.title = request.POST.get('title')
+        post_continue.text = request.POST.get('text')
+        post_continue.image = request.FILES.get('image')
+        post_continue.save()
+        post.continues_count += 1
         post.save()
+
+        return redirect('/')
     else:
-        form = PostCreateForm(request.POST)
-    render(request, 'post_create.html', {'form': form})
+        form = ContinueCreationForm(request.POST)
+    return render(request, 'post_create.html', {'form': form})
 
 
 @login_required

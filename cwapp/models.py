@@ -20,6 +20,7 @@ class Post(models.Model):
     image = models.ImageField(upload_to='images')
 
     continues_max = models.PositiveIntegerField(default=0)
+    continues_count = models.PositiveIntegerField(default=0)
     published = models.DateTimeField(auto_now=True)
     changed = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(User, related_name='post_likes', blank=True)
@@ -39,7 +40,7 @@ class PostContinue(models.Model):
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, null=True, blank=True)
     text = models.TextField(max_length=3000)
-    image = models.ImageField(upload_to='images')
+    image = models.ImageField(upload_to='images', null=True, blank=True)
     created = models.DateTimeField(auto_now=True)
     changed = models.DateTimeField(auto_now_add=True)
 

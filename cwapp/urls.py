@@ -7,7 +7,7 @@ urlpatterns = [
     path('logout/', views.logout_url, name='logout_url'),
     path('login/', auth_views.LoginView.as_view(template_name='registration/login.html'), name='login'),
     path('create_post/', views.post_create, name='create_post'),
-    path('continue_create/', views.continue_create, name='continue_create'),
+    path('continue_create/<int:post_id>', views.continue_create, name='continue_create'),
     path('profile/', views.profile, name='profile'),
     path('like/<post_id>/', views.like_post, name='like_post'),
     path('post_delete/<post_id>', views.post_delete, name='post_delete'),

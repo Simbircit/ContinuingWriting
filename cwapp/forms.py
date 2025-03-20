@@ -18,14 +18,14 @@ class LoginUser(AuthenticationForm):
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post
-        fields = ['author', 'title', 'description', 'start_title', 'post_start', 'end_title', 'post_end', 'status',
+        fields = ['title', 'description', 'start_title', 'post_start', 'end_title', 'post_end', 'status',
                   'image', 'continues_max']
 
 
 class ContinueCreationForm(forms.ModelForm):
     class Meta:
         model = PostContinue
-        fields = []
+        fields = ['title', 'text', 'image']
 
 
 class CommentForm(forms.ModelForm):

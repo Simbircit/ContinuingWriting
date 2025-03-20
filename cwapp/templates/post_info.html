@@ -7,10 +7,11 @@
                 <img src="{{post.image.url}}" alt="" class="post_img">
                 <h2 class="">{{post.title}}</h2>
                 <h2>{{post.likes.count}}</h2>
+                <a href="{%url 'continue_create' post.id%}">Create Continue</a>
             </div>
         </a>
         {%for continue in continues%}
-        <a href="" class="">{{continue.title}}</a>
+        <a href="{%url 'continue' continue.id%}" class="">{{continue.title}}</a>
         {%endfor%}
         <form method="post">
             {%csrf_token%}
