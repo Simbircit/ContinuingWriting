@@ -2,20 +2,35 @@
 {%block title%}{{post.title}}{%endblock%}
 {%block content%}
     <main>
-        <div class="">
+        <div class="posts">
             <img src="{{post.image.url}}" alt="">
-            <h2>{{post.title}}</h2>
+            <h2 class="post_text">{{post.title}}</h2>
+            <h2 class="post_text">{{post.description}}</h2>
+            <a href="{%url 'another_profile' post.author.id%}">{{post.author}}</a>
+            <a href="{%url 'like_post' post.id%}">
+                {%if user in post.likes.all%}
+                <img src="/static/like_full.png" alt="" class="like">
+                {%else%}
+                <img src="/static/like.png" alt="" class="like">
+                {%endif%}
+            </a>
         </div>
+        <p class="post_text">{{post.start_title}}</p>
+        <p class="post_text">{{post.post_start}}</p>
+        {%for continue in continues%}
+        <p class="post_text">{{continue.title}}</p>
+        <p class="post_text">{{continue.text}}</p>
+        {%endfor%}
         <form method="post">
             {%csrf_token%}
             {{form}}
-            <button>написать</button>
+            <button>Написать</button>
         </form>
-        <section class="posts">
+        <section class="comments">
             {%for comment in comments%}
             <h2>
-                <a href="">{{comment.user}}</a>
-                <h2 class="">{{comment.text}}</h2>
+                <a href="{%url 'another_profile' comment.author.username%}">{{comment.author.username}}</a>
+                <h2>{{comment.text}}</h2>
             </h2>
             {%endfor%}
         </section>

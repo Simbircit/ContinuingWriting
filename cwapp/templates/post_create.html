@@ -2,10 +2,10 @@
 {%block title%}Continuing Writing{%endblock%}
 {%block content%}
 <main>
-    <form method="post">
+    <form method="post" enctype='multipart/form-data'>
         {%csrf_token%}
         {{form}}
-        <button>CreatePost</button>
+        <button>Create Post</button>
     </form>
 </main>
 {%endblock%}

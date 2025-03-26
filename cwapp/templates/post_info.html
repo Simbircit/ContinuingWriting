@@ -2,27 +2,44 @@
 {%block title%}{{post.title}}{%endblock%}
 {%block content%}
     <main>
-        <a href="{%url 'post' post.id%}">
-            <div class="post">
-                <img src="{{post.image.url}}" alt="" class="post_img">
-                <h2 class="">{{post.title}}</h2>
-                <h2>{{post.likes.count}}</h2>
-                <a href="{%url 'continue_create' post.id%}">Create Continue</a>
+        <section class='post_info'>
+            <img src="{{post.image.url}}" alt="" class="post_info_img">
+            <div>
+                <div class="post">
+                    <a href="{%url 'post' post.id%}" class='post_link'>
+                        <h2>{{post.title}}</h2>
+                    </a>
+                    <p>{{post.description}}</p>
+                    <h2>{{post.likes.count}}</h2>
+                    <a href='{%url "continue_create" post.id%}'>continue_create</a>
+                    <a href="{%url 'like_post' post.id%}">
+                        {%if user in post.likes.all%}
+                        <img src="/static/like_full.png" alt="" class="like">
+                        {%else%}
+                        <img src="/static/like.png" alt="" class="like">
+                        {%endif%}
+                    </a>
+                    {%if user == post.author%}
+                    <a href="{%url 'post_delete' post.id%}">
+                        <img src="/static/x_img.png" alt="" class="like">
+                    </a>
+                    {%endif%}
+                </div>
+                {%for continue in continues%}
+                <a href="{%url 'post' post.id%}"class="">{{continue.title}}</a>
+                {%endfor%}
             </div>
-        </a>
-        {%for continue in continues%}
-        <a href="{%url 'continue' continue.id%}" class="">{{continue.title}}</a>
-        {%endfor%}
+        </section>
         <form method="post">
             {%csrf_token%}
             {{form}}
             <button>написать</button>
         </form>
-        <section class="posts">
+        <section class="comments">
             {%for comment in comments%}
             <h2>
-                <a href="">{{comment.user}}</a>
-                <h2 class="">{{comment.text}}</h2>
+                <a href="{%url 'another_profile' comment.author.username%}">{{comment.author.username}}</a>
+                <h2>{{comment.text}}</h2>
             </h2>
             {%endfor%}
         </section>

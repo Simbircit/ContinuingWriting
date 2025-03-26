@@ -15,7 +15,7 @@ urlpatterns = [
     path('another_profile/<str:username>', views.another_profile, name='another_profile'),
     path('post/<int:post_id>', views.post_page, name='post'),
     path('post_info/<int:post_id>', views.post_info, name='post_info'),
-    path('post_continue/<int:continue_id>', views.post_continue, name='continue'),
+    # path('post_continue/<int:continue_id>', views.post_continue, name='continue'),
     path('password_change_form/',
          auth_views.PasswordChangeView.as_view(template_name='registration/password_change.html'),
          name='password_change_form'),

@@ -94,23 +94,23 @@ def post_page(request, post_id):
     return render(request, 'post.html', context)
 
 
-def post_continue(request, continue_id):
-
-    post_continue = get_object_or_404(PostContinue, id=continue_id)
-    comments = Comment.objects.filter(post_continue_id=continue_id)
-
-    if request.method == 'POST':
-        form = CommentForm(request.POST)
-        comment = Comment()
-        comment.author = User.objects.get(username=request.user.username)
-        comment.post_continue = PostContinue.objects.get(id=continue_id)
-        comment.text = request.POST.get('text')
-        comment.save()
-    else:
-        form = CommentForm()
-
-    context = {'post_continue': post_continue, 'comments': comments, 'form': form}
-    return render(request, 'post_continue.html', context)
+# def post_continue(request, continue_id):
+#
+#     post_continue = get_object_or_404(PostContinue, id=continue_id)
+#     comments = Comment.objects.filter(post_continue_id=continue_id)
+#
+#     if request.method == 'POST':
+#         form = CommentForm(request.POST)
+#         comment = Comment()
+#         comment.author = User.objects.get(username=request.user.username)
+#         comment.post_continue = PostContinue.objects.get(id=continue_id)
+#         comment.text = request.POST.get('text')
+#         comment.save()
+#     else:
+#         form = CommentForm()
+#
+#     context = {'post_continue': post_continue, 'comments': comments, 'form': form}
+#     return render(request, 'post_continue.html', context)
 
 
 def post_info(request, post_id):
@@ -170,9 +170,10 @@ def continue_create(request, post_id):
         post_continue.title = request.POST.get('title')
         post_continue.text = request.POST.get('text')
         post_continue.image = request.FILES.get('image')
-        post_continue.save()
         post.continues_count += 1
         post.save()
+        if post.continues_max >= post.continues_count:
+            post_continue.save()
 
         return redirect('/')
     else:

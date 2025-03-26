@@ -3,7 +3,6 @@
 {%block content%}
 <main>
     <div>
-        <h2>{{request.user.username}}</h2>
         <img src="{{request.user.profile.avatar.url}}" class="profile_img">
     </div>
     <form method="post" enctype="multipart/form-data">
@@ -18,28 +17,27 @@
     </form>
     <a href="{%url 'password_change_form'%}">Password change</a>
     <h2>Ваши П0СТЫ</h2>
-    <section class="post_section">
+    <section class="posts_best">
         {%for post in posts%}
-        <a href="{%url 'post' post.id%}">
-            <div class="post">
-                <img src="{{post.image.url}}" class="post_image">
-                <p class="description">{{post.description|truncatewords:10}}</p>
-                <h3><h2>{{post.author}}</h2> {{post.likes.count}}
-                    <a href="{%url 'like_post' post.id%}">
-                        {%if user in post.likes.all%}
-                        <img src="/static/images/FulLike.png" alt="" class="like">
-                        {%else%}
-                        <img src="/static/images/Like.png" alt="" class="like">
-                        {%endif%}
-                    </a>
-                    {%if user == post.author%}
-                    <a href="{%url 'post_delete' post.id%}">
-                        <img src="/static/images/x.png" alt="" class="like">
-                    </a>
-                    {%endif%}
-                </h3>
-            </div>
-        </a>
+        <div class="post">
+            <a href="{%url 'post_info' post.id%}" class='post_link'>
+                <img src="{{post.image.url}}" alt="" class="post_img">
+                <h2>{{post.title|truncatewords:20}}</h2>
+            </a>
+            <a href="{%url 'like_post' post.id%}">
+                {%if user in post.likes.all%}
+                <img src="/static/like_full.png" alt="" class="like">
+                {%else%}
+                <img src="/static/like.png" alt="" class="like">
+                {%endif%}
+            </a>
+            <h2>{{post.likes.count}}</h2>
+            {%if user == post.author%}
+            <a href="{%url 'post_delete' post.id%}">
+                <img src="/static/x_img.png" alt="" class="like">
+            </a>
+            {%endif%}
+        </div>
         {%endfor%}
     </section>
 </main>
