@@ -7,7 +7,7 @@
             {%for post in posts_best%}
             <div class="post">
                 <a href="{%url 'post_info' post.id%}" class='post_link'>
-                    <img src="{{post.image.url}}" alt="" class="post_img">
+                    <img src="{{post.image.url}}" alt="" class="post_img"  loading="lazy">
                     <h2>{{post.title|truncatewords:20}}</h2>
                 </a>
                 <h2>{{post.likes.count}}</h2>
@@ -20,7 +20,7 @@
             <a href="{%url 'post_info' post.id%}">
                 <div class="post">
                     {%if post.image%}
-                    <img src="{{post.image.url}}" alt="" class="post_img">
+                    <img src="{{post.image.url}}" alt="" class="post_img"  loading="lazy">
                     {%endif%}
                     <h2>{{post.title}}</h2>
                 </div>

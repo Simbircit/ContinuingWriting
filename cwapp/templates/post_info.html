@@ -3,7 +3,7 @@
 {%block content%}
     <main>
         <section class='post_info'>
-            <img src="{{post.image.url}}" alt="" class="post_info_img">
+            <img src="{{post.image.url}}" alt="" class="post_info_img"  loading="lazy">
             <div>
                 <div class="post">
                     <a href="{%url 'post' post.id%}" class='post_link'>
@@ -14,9 +14,9 @@
                     <a href='{%url "continue_create" post.id%}'>continue_create</a>
                     <a href="{%url 'like_post' post.id%}">
                         {%if user in post.likes.all%}
-                        <img src="/static/like_full.png" alt="" class="like">
+                        <img src="/static/like_full.png" alt="" class="like"  loading="lazy">
                         {%else%}
-                        <img src="/static/like.png" alt="" class="like">
+                        <img src="/static/like.png" alt="" class="like"  loading="lazy">
                         {%endif%}
                     </a>
                     {%if user == post.author%}

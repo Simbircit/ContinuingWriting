@@ -3,19 +3,19 @@
 {%block content%}
 <main>
     <h2>{{profile_obj.user.username}}</h2>
-    <img src="{{request.user.profile.avatar.url}}" class="profile_img">
+    <img src="{{request.user.profile.avatar.url}}" class="profile_img"  loading="lazy">
     <h2>Ваши П0СТЫ</h2>
     <section class="posts_best">
         {%for post in posts%}
             <div class="post">
                 <a href="{%url 'post_info' post.id%}" class='post_link'>
-                    <img src="{{post.image.url}}" alt="" class="post_img">
+                    <img src="{{post.image.url}}" alt="" class="post_img"  loading="lazy">
                     <h2>{{post.title|truncatewords:20}}</h2>
                 </a>
                 <h2>{{post.likes.count}}</h2>
                 {%if user == post.author%}
                 <a href="{%url 'post_delete' post.id%}">
-                    <img src="/static/x_img.png" alt="" class="like">
+                    <img src="/static/x_img.png" alt="" class="like"  loading="lazy">
                 </a>
                 {%endif%}
             </div>
