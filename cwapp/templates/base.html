@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{%block title%}{%endblock%}</title>
     {%load static%}
-    <link rel="stylesheet" href="{% static 'style.css'%}">
+    <link rel="preload" href="{% static 'style.css'%}">
 </head>
 <body>
     <header>
@@ -18,7 +18,7 @@
         </nav>
         <a href="{%url 'profile'%}" class="profile_box">
             <h2 class="username">{{user.username}}</h2>
-            <img src="{{user.profile.avatar.url}}" alt="" class="avatar">
+            <img src="{{user.profile.avatar.url}}" alt="" class="avatar" loading="lazy">
         </a>
         <a href="{%url 'logout_url'%}">logout</a>
         {%else%}

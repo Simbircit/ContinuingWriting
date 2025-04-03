@@ -3,10 +3,11 @@
 {%block content%}
     <main>
         <div class="posts">
-            <img src="{{post.image.url}}" alt="">
+            <img src="{{post.image.url}}" alt="" class="posts"  loading="lazy">
             <h2 class="post_text">{{post.title}}</h2>
             <h2 class="post_text">{{post.description}}</h2>
             <a href="{%url 'another_profile' post.author.id%}">{{post.author}}</a>
+            <p>{{post.likes.count}}</p>
             <a href="{%url 'like_post' post.id%}">
                 {%if user in post.likes.all%}
                 <img src="/static/like_full.png" alt="" class="like">
